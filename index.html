@@ -1,0 +1,1749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Lumi — Discord Bot</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/favicon.png" />
+
+
+  <style>
+    :root {
+      --bg-top: #f3e2c8;
+      --bg-mid: #d1ad82;
+      --bg-bottom: #0f0b1f;
+
+      --card: #f9f0e1;
+      --accent: #c97b4a;
+      --accent-dark: #a25b33;
+      --text-main: #2b1c13;
+      --text-muted: #8a6b4e;
+      --pill: #fdf5ea;
+
+      --radius-lg: 26px;
+      --radius-pill: 999px;
+      --shadow-soft: 0 18px 50px rgba(77, 51, 25, 0.24);
+      --shadow-deep: 0 24px 60px rgba(0, 0, 0, 0.55);
+      --font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: var(--font);
+      background:
+        radial-gradient(circle at top, #f7e5c9 0, #e2c297 40%, transparent 70%),
+        linear-gradient(to bottom, #d1ad82 0, #5c445d 55%, #0f0b1f 100%);
+      color: var(--text-main);
+      display: flex;
+      justify-content: center;
+      padding: 20px 14px 40px;
+    }
+
+    .shell {
+      width: 100%;
+      max-width: 1100px;
+    }
+
+    /* top nav */
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #f5e0c3;
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.7),
+                  0 8px 18px rgba(124, 80, 40, 0.35);
+      overflow: hidden;
+    }
+
+    .brand-icon img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-name {
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+    }
+
+    .brand-tagline {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      font-size: 0.86rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-muted);
+      padding-bottom: 2px;
+      border-bottom: 1px dashed rgba(0, 0, 0, 0.08);
+    }
+
+    .nav-links a:hover {
+      color: var(--accent-dark);
+      border-bottom-style: solid;
+    }
+
+    /* hero card */
+
+    .hero-card {
+      background: radial-gradient(circle at top, #fbead4 0, #f6e3cf 45%, #f3dec8 100%);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+      border: 1px solid rgba(180, 138, 90, 0.35);
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.2fr);
+      min-height: 360px;
+      margin-bottom: 26px;
+    }
+
+    .hero-main {
+      padding: 28px 30px 26px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 18px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      background: var(--pill);
+      border: 1px solid rgba(201, 123, 74, 0.4);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .pill-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .hero-title {
+      font-size: 2.1rem;
+      line-height: 1.1;
+      letter-spacing: 0.02em;
+      margin-top: 2px;
+    }
+
+    .hero-subtitle {
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      max-width: 460px;
+    }
+
+    .hero-actions {
+      margin-top: 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 360px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: var(--radius-pill);
+      font-size: 0.96rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.12s ease, box-shadow 0.12s ease,
+                  background-color 0.12s ease, filter 0.12s ease;
+      white-space: nowrap;
+    }
+
+    .btn:active {
+      transform: translateY(1px) scale(0.99);
+      filter: brightness(0.96);
+    }
+
+    .btn-primary {
+      padding: 14px 22px;
+      background: linear-gradient(135deg, #d88b52, #c26833);
+      color: #fff;
+      box-shadow: 0 18px 28px rgba(161, 91, 51, 0.45);
+      justify-content: center;
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.04);
+      box-shadow: 0 22px 34px rgba(161, 91, 51, 0.55);
+      transform: translateY(-1px);
+    }
+
+    .hero-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 18px;
+      font-size: 0.86rem;
+      color: var(--text-muted);
+    }
+
+    .hero-links span {
+      opacity: 0.9;
+    }
+
+    .hero-links a {
+      color: var(--accent-dark);
+      font-weight: 500;
+      text-decoration: none;
+      border-bottom: 1px dashed rgba(172, 107, 61, 0.4);
+      padding-bottom: 1px;
+    }
+
+    .hero-links a:hover {
+      border-bottom-style: solid;
+    }
+
+    .hero-side {
+      position: relative;
+      background:
+        radial-gradient(circle at top left, #f9e2c0 0, #e7b67a 30%, transparent 55%),
+        radial-gradient(circle at bottom right, #4c345f 0, #1d132b 60%, #090711 100%);
+      padding: 20px 22px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      justify-content: space-between;
+      color: #fdf5ea;
+    }
+
+    .info-card {
+      background: radial-gradient(circle at top left, #302445 0, #161223 55%, #0c0a16 100%);
+      border-radius: 24px;
+      padding: 16px 18px 18px;
+      box-shadow: var(--shadow-deep);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .info-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .info-title {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .info-title-main {
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .info-title-sub {
+      font-size: 0.76rem;
+      opacity: 0.75;
+    }
+
+    .info-tag {
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.74rem;
+      background: linear-gradient(135deg, #433257, #27213b);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .info-tag-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #4ade80;
+      box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.25);
+    }
+
+    .info-banner {
+      margin-top: 6px;
+      background: linear-gradient(135deg, #4b3471, #9153c0, #fcb98c);
+      border-radius: 16px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .info-banner-main {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 0.82rem;
+    }
+
+    .info-banner-main span:first-child {
+      font-weight: 600;
+    }
+
+    .info-banner-main span:last-child {
+      opacity: 0.85;
+      font-size: 0.76rem;
+    }
+
+    .info-badge {
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 0.74rem;
+      background: rgba(7, 6, 24, 0.28);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      white-space: nowrap;
+    }
+
+    .hero-side-footer {
+      font-size: 0.76rem;
+      opacity: 0.92;
+      text-align: right;
+    }
+
+    /* command area wrapper — gradient transition */
+
+    .commands-wrapper {
+      margin-top: 10px;
+      border-radius: 26px;
+      padding: 18px 18px 20px;
+      background:
+        linear-gradient(
+          to bottom,
+          rgba(243, 222, 194, 0.92) 0,
+          rgba(209, 173, 130, 0.9) 15%,
+          rgba(65, 45, 86, 0.96) 45%,
+          #070412 100%
+        );
+      box-shadow: 0 22px 60px rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(0, 0, 0, 0.25);
+      color: #f7efff;
+    }
+
+    /* heading */
+
+    .section-heading {
+      margin: 4px 2px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      color: #1d1310;
+    }
+
+    .section-heading h2 {
+      font-size: 1.3rem;
+    }
+
+    .section-heading p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      max-width: 540px;
+    }
+
+    /* category chips */
+
+    .command-categories {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+
+    .category-btn {
+      border-radius: 18px;
+      border: 1px solid rgba(0,0,0,0.08);
+      background: rgba(255, 255, 255, 0.95);
+      padding: 10px 12px;
+      font-size: 0.9rem;
+      text-align: left;
+      cursor: pointer;
+      box-shadow: 0 10px 20px rgba(87, 60, 31, 0.18);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease, color 0.12s ease;
+      color: var(--text-main);
+    }
+
+    .category-btn span.title {
+      font-weight: 600;
+    }
+
+    .category-btn span.desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .category-btn:hover {
+      transform: translateY(-2px);
+      background: #fff7ec;
+      box-shadow: 0 14px 30px rgba(87, 60, 31, 0.26);
+    }
+
+    .category-btn.active {
+      background: linear-gradient(135deg, #2a1838, #4c305e);
+      color: #fdf5ea;
+      box-shadow: 0 16px 36px rgba(10, 4, 30, 0.6);
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+
+    .category-btn.active span.desc {
+      color: #e6d5ff;
+    }
+
+    /* command sections as tab panels */
+
+    .command-section {
+      position: relative;
+      margin-bottom: 18px;
+      border-radius: 22px;
+      background: radial-gradient(circle at top left, #221735 0, #151024 45%, #231634 100%);
+      color: #f7efff;
+      padding: 18px 18px 16px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55);
+      border: 1px solid rgba(185, 150, 255, 0.22);
+      display: none;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.18s ease, transform 0.18s ease;
+      overflow: hidden;
+    }
+
+    .command-section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      border: 1px solid rgba(255, 255, 255, 0.03);
+      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.28);
+    }
+
+    .command-section.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .command-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .command-header h3 {
+      font-size: 1.02rem;
+    }
+
+    .command-header p {
+      font-size: 0.8rem;
+      opacity: 0.8;
+    }
+
+    .command-body {
+      font-size: 0.84rem;
+      line-height: 1.6;
+      position: relative;
+      z-index: 1;
+    }
+
+    .command-body p.placeholder {
+      opacity: 0.78;
+    }
+
+    .command-body ul {
+      margin-top: 6px;
+      padding-left: 1.1rem;
+      list-style: none;
+    }
+
+    .command-body ul li::before {
+      content: "•";
+      margin-right: 6px;
+      font-size: 0.9rem;
+      opacity: 0.75;
+    }
+
+    .command-body ul li {
+      margin-bottom: 4px;
+    }
+
+    .command-footer {
+      margin-top: 8px;
+      font-size: 0.76rem;
+      opacity: 0.7;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* nicer command layout */
+
+    .command-body .command-intro {
+      margin-bottom: 10px;
+      opacity: 0.95;
+    }
+
+    .command-table {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .command-row {
+      display: grid;
+      grid-template-columns: minmax(0, 230px) minmax(0, 1fr);
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      align-items: flex-start;
+    }
+
+    .command-row:hover {
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .cmd-name code {
+      display: inline-block;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+        "Liberation Mono", "Courier New", monospace;
+      background: rgba(0, 0, 0, 0.45);
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+    }
+
+    .cmd-desc {
+      font-size: 0.82rem;
+      color: #e7dcff;
+    }
+
+    .command-subheading {
+      margin-top: 12px;
+      margin-bottom: 4px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #f9e4ff;
+      opacity: 0.9;
+    }
+
+    .command-note {
+      margin-top: 10px;
+      font-size: 0.76rem;
+      opacity: 0.72;
+    }
+
+    /* footer */
+
+    .page-footer {
+      margin-top: 12px;
+      font-size: 0.78rem;
+      color: #d7c5ff;
+      text-align: center;
+      opacity: 0.9;
+    }
+
+    .page-footer a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page-footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* responsive tweaks */
+
+    @media (max-width: 860px) {
+      .hero-card {
+        grid-template-columns: 1fr;
+      }
+      .hero-side {
+        order: -1;
+      }
+      .hero-main {
+        padding: 22px 18px 20px;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .command-row {
+        grid-template-columns: 1fr;
+        gap: 4px;
+        padding: 8px 8px;
+      }
+
+      .cmd-name {
+        margin-bottom: 2px;
+      }
+
+      .cmd-name code {
+        width: 100%;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+      .nav-links {
+        font-size: 0.8rem;
+        gap: 12px;
+      }
+      .hero-title {
+        font-size: 1.7rem;
+      }
+      .hero-actions {
+        max-width: none;
+      }
+      .commands-wrapper {
+        padding: 14px 12px 18px;
+      }
+      .command-section {
+        padding: 16px 12px 14px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <!-- NAV -->
+    <header class="nav">
+      <div class="brand">
+        <div class="brand-icon">
+          <img
+            src="https://cdn.discordapp.com/avatars/1440201607932543068/a916de4493dd58ad65d2744fa14e9aa0.webp?size=4096"
+            alt="Lumi avatar"
+          />
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">Lumi</span>
+          <span class="brand-tagline">Soft, cozy Discord automation.</span>
+        </div>
+      </div>
+
+      <nav class="nav-links">
+        <a href="https://discord.com/oauth2/authorize?client_id=1440201607932543068">Invite Lumi</a>
+        <a href="https://discord.gg/pvztFtaDMP">Support Server</a>
+        <a href="https://lumibot.netlify.app/tos">Terms</a>
+        <a href="https://lumibot.netlify.app/privacy_policy">Privacy</a>
+      </nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero-card">
+      <div class="hero-main">
+        <div class="pill">
+          <span class="pill-dot"></span>
+          <span>Discord bot</span>
+        </div>
+
+        <h1 class="hero-title">Cozy automation for your Discord server.</h1>
+
+        <p class="hero-subtitle">
+          Lumi keeps your community warm and organized with moderation, utility,
+          fun commands, giveaways and more — without feeling like a boring tool.
+        </p>
+
+        <div class="hero-actions">
+          <a id="start-btn" class="btn btn-primary" href="#commands-area">
+            Start with Lumi
+          </a>
+
+          <div class="hero-links">
+            <span>Need the boring legal stuff?</span>
+            <a href="https://lumibot.netlify.app/tos">Terms of Service</a>
+            <a href="https://lumibot.netlify.app/privacy_policy">Privacy Policy</a>
+          </div>
+        </div>
+      </div>
+
+      <aside class="hero-side" aria-hidden="true">
+        <div class="info-card">
+          <div class="info-header">
+            <div class="info-title">
+              <span class="info-title-main">Command library</span>
+              <span class="info-title-sub">
+                A quick peek at the categories Lumi offers.
+              </span>
+            </div>
+            <div class="info-tag">
+              <span class="info-tag-dot"></span>
+              <span>Prefix based</span>
+            </div>
+          </div>
+
+          <div class="info-banner">
+            <div class="info-banner-main">
+              <span>Welcome, server owner 👋</span>
+              <span>Scroll down to see all commands and usage examples.</span>
+            </div>
+            <div class="info-badge">
+              Lumi ready to help ✨
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-side-footer">
+          Made for comfy, well-organized communities.
+        </div>
+      </aside>
+    </section>
+
+    <!-- COMMANDS AREA (gradient wrapper) -->
+    <section id="commands-area" class="commands-wrapper">
+      <div class="section-heading">
+        <h2>Command overview</h2>
+        <p>
+          Pick a category below to see all prefix commands. For more commands dm theirsuju.
+        </p>
+      </div>
+
+      <div class="command-categories" id="command-categories">
+        <button class="category-btn" data-target="ai-commands">
+          <span class="title">AI system</span>
+          <span class="desc">Chat, tools and smart helpers powered by Lumi’s AI.</span>
+        </button>
+
+        <button class="category-btn" data-target="mod-commands">
+          <span class="title">Moderation commands</span>
+          <span class="desc">Keep your server safe and spam-free with simple tools.</span>
+        </button>
+
+        <button class="category-btn" data-target="fun-commands">
+          <span class="title">Fun commands</span>
+          <span class="desc">Games, reactions and silly stuff to keep chat alive.</span>
+        </button>
+
+        <button class="category-btn" data-target="util-commands">
+          <span class="title">Utility commands</span>
+          <span class="desc">Info, tools and shortcuts for everyday server life.</span>
+        </button>
+
+        <button class="category-btn" data-target="log-commands">
+          <span class="title">Logging & events</span>
+          <span class="desc">Track joins, deletes and edits in dedicated channels.</span>
+        </button>
+      </div>
+
+      <!-- COMMAND SECTIONS (tab panels) -->
+
+      <section id="ai-commands" class="command-section">
+        <div class="command-header">
+          <h3>AI system</h3>
+          <p>All AI-powered features and helpers.</p>
+        </div>
+        <div class="command-body">
+          <p class="command-intro">
+            Configure Lumi's AI behaviour with these commands:
+          </p>
+
+          <div class="command-table">
+            <div class="command-row">
+              <div class="cmd-name">
+                <code>.ai enable [#channel]</code>
+              </div>
+              <div class="cmd-desc">
+                Enable AI in a channel. If no channel is given, it uses
+                the channel where you run the command.
+              </div>
+            </div>
+
+            <div class="command-row">
+              <div class="cmd-name">
+                <code>.ai disable [#channel]</code>
+              </div>
+              <div class="cmd-desc">
+                Disable AI in a specific channel (good for spammy / games channels).
+              </div>
+            </div>
+
+            <div class="command-row">
+              <div class="cmd-name">
+                <code>.ai enable server</code>
+              </div>
+              <div class="cmd-desc">
+                Turn AI on for the whole server. All channels can use AI
+                except ones you’ve disabled.
+              </div>
+            </div>
+
+            <div class="command-row">
+              <div class="cmd-name">
+                <code>.ai disable server</code>
+              </div>
+              <div class="cmd-desc">
+                Turn AI off for the whole server. Only channels you
+                explicitly enabled will still be able to use it.
+              </div>
+            </div>
+
+            <div class="command-row">
+              <div class="cmd-name">
+                <code>.ai status</code>
+              </div>
+              <div class="cmd-desc">
+                Show current AI settings for the server and for the channel
+                you are in.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="command-footer">
+          More AI commands coming soon…
+        </div>
+      </section>
+
+      <section id="mod-commands" class="command-section">
+        <div class="command-header">
+          <h3>Moderation commands</h3>
+          <p>For staff and mods to manage the server.</p>
+        </div>
+        <div class="command-body">
+          <p class="command-intro">
+            Core moderation tools to keep your server safe and clean:
+          </p>
+
+          <div class="command-table">
+                 <!-- PREFIX CONTROL -->
+      <div class="command-subheading">Prefix control</div>
+
+      <div class="command-row">
+        <div class="cmd-name">
+          <code>.setprefix &lt;prefix&gt;</code>
+        </div>
+        <div class="cmd-desc">
+          Changes Lumi’s prefix only for this server.  
+          Example: <code>.setprefix !</code> → commands become <code>!help</code>, <code>!ai</code>, etc.  
+          (Admins only)
+        </div>
+      </div>
+
+      <div class="command-row">
+        <div class="cmd-name">
+          <code>.prefixreset</code>
+        </div>
+        <div class="cmd-desc">
+          Resets the prefix back to the default <code>.</code> for this server.  
+          (Admins only)
+        </div>
+      </div>
+
+            <!-- KICK -->
+            <div class="command-subheading">Kick</div>
+            <div class="command-row">
+              <div class="cmd-name">
+                <code>.kick @user [reason]</code>
+              </div>
+              <div class="cmd-desc">
+                Kicks the mentioned user from the server with an optional reason.
+              </div>
+            </div>
+
+            <!-- MUTE / TIMEOUT -->
+            <div class="command-subheading">Mute / Timeout</div>
+            <div class="command-row">
+              <div class="cmd-name">
+                <code>.mute @user &lt;duration&gt; [reason]</code><br />
+                <code>.timeout @user &lt;duration&gt; [reason]</code>
+              </div>
+              <div class="cmd-desc">
+                Temporarily mutes / timeouts the user for the given duration
+                (e.g. <code>10m</code>, <code>1h</code>, <code>2d</code>).
+              </div>
+            </div>
+
+            <div class="command-row">
+              <div class="cmd-name">
+                <code>.unmute @user [reason]</code>
+              </div>
+              <div class="cmd-desc">
+                Removes any active mute / timeout on the user.
+              </div>
+            </div>
+          
+           <!-- NICKNAME TOOLS -->
+<div class="command-subheading">Nickname tools</div>
+
+<div class="command-row">
+  <div class="cmd-name">
+    <code>.nick @user &lt;nickname&gt;</code>
+  </div>
+  <div class="cmd-desc">
+    Changes the nickname of the mentioned user.
+  </div>
+</div>
+
+<div class="command-row">
+  <div class="cmd-name">
+    <code>.nickreset @user</code>
+  </div>
+  <div class="cmd-desc">
+    Resets the user's nickname back to their original username.
+  </div>
+</div>
+
+<!-- SLOWMODE -->
+<div class="command-subheading">Slowmode</div>
+
+<div class="command-row">
+  <div class="cmd-name">
+    <code>.slowmode &lt;seconds&gt; [channel]</code>
+  </div>
+  <div class="cmd-desc">
+    Enables slowmode on the channel (or mentioned channel) for the chosen seconds.
+  </div>
+</div>
+
+<div class="command-row">
+  <div class="cmd-name">
+    <code>.slowmode off</code>
+  </div>
+  <div class="cmd-desc">
+    Turns off slowmode for the current channel.
+  </div>
+</div>
+
+<!-- STEAL -->
+<div class="command-subheading">Emoji stealer</div>
+
+<div class="command-row">
+  <div class="cmd-name">
+    <code>.steal [emoji]</code>
+  </div>
+  <div class="cmd-desc">
+    Adds the provided custom emoji to the server with the same name.  
+    (Works with animated emojis too)
+  </div>
+</div>
+
+
+            <!-- PURGE / CLEAR -->
+            <div class="command-subheading">Purge / clear</div>
+            <div class="command-row">
+              <div class="cmd-name">
+                <code>.c &lt;amount&gt;</code>
+              </div>
+              <div class="cmd-desc">
+                Deletes the last <code>amount</code> messages in the channel
+                (default is <code>1</code> if no number is given).
+              </div>
+            </div>
+
+            <div class="command-row">
+              <div class="cmd-name">
+                <code>.c @user &lt;amount&gt;</code>
+              </div>
+              <div class="cmd-desc">
+                Deletes recent messages from a specific user only.
+              </div>
+            </div>
+
+            <div class="command-row">
+              <div class="cmd-name">
+                <code>.c bots &lt;amount&gt;</code>
+              </div>
+              <div class="cmd-desc">
+                Deletes messages sent by bots.
+              </div>
+            </div>
+
+            <div class="command-row">
+              <div class="cmd-name">
+                <code>.c humans &lt;amount&gt;</code>
+              </div>
+              <div class="cmd-desc">
+                Deletes messages sent by human users only.
+              </div>
+            </div>
+
+            <div class="command-row">
+              <div class="cmd-name">
+                <code>.c links &lt;amount&gt;</code>
+              </div>
+              <div class="cmd-desc">
+                Clears messages containing links (good for quick anti-raid).
+              </div>
+            </div>
+
+            <div class="command-row">
+              <div class="cmd-name">
+                <code>.c invites &lt;amount&gt;</code>
+              </div>
+              <div class="cmd-desc">
+                Deletes messages that contain Discord invites.
+              </div>
+            </div>
+
+            <div class="command-row">
+              <div class="cmd-name">
+                <code>.c contains &lt;text&gt; &lt;amount&gt;</code>
+              </div>
+              <div class="cmd-desc">
+                Deletes messages that contain the given text phrase.
+              </div>
+            </div>
+
+            <!-- CLEANUP -->
+            <div class="command-subheading">Cleanup</div>
+            <div class="command-row">
+              <div class="cmd-name">
+                <code>.cleanup</code> / <code>.cl</code> / <code>.clean</code>
+              </div>
+              <div class="cmd-desc">
+                Cleans up Lumi’s own command replies / clutter from the channel.
+              </div>
+            </div>
+
+            <!-- WARN SYSTEM -->
+            <div class="command-subheading">Warn system</div>
+            <div class="command-row">
+              <div class="cmd-name">
+                <code>.warn &lt;user/id&gt; [reason]</code>
+              </div>
+              <div class="cmd-desc">
+                Adds a warning to the user with an optional reason.
+              </div>
+            </div>
+
+            <div class="command-row">
+              <div class="cmd-name">
+                <code>.warnings &lt;user/id&gt;</code>
+              </div>
+              <div class="cmd-desc">
+                Shows all stored warnings for that user.
+              </div>
+            </div>
+
+            <div class="command-row">
+              <div class="cmd-name">
+                <code>.warnings clear &lt;warnID&gt;</code>
+              </div>
+              <div class="cmd-desc">
+                Clears a single warning using its ID.
+              </div>
+            </div>
+
+            <div class="command-row">
+              <div class="cmd-name">
+                <code>.warnings clearall &lt;user/id&gt;</code>
+              </div>
+              <div class="cmd-desc">
+                Removes every warning stored for that user.
+              </div>
+            </div>
+
+            <!-- ROLE TOOLS -->
+            <div class="command-subheading">Role tools</div>
+            <div class="command-row">
+              <div class="cmd-name">
+                <code>.role &lt;user&gt; &lt;role&gt;</code>
+              </div>
+              <div class="cmd-desc">
+                Gives or removes the specified role from the user
+                (mention / ID / name supported).
+              </div>
+            </div>
+
+            <div class="command-row">
+              <div class="cmd-name">
+                <code>.rolecreate &lt;name&gt; &lt;#hex&gt;</code>
+              </div>
+              <div class="cmd-desc">
+                Creates a new role with the given name and colour.
+              </div>
+            </div>
+
+            <div class="command-row">
+              <div class="cmd-name">
+                <code>.rolerename &lt;role&gt; &lt;newname&gt;</code>
+              </div>
+              <div class="cmd-desc">
+                Renames an existing role.
+              </div>
+            </div>
+
+            <div class="command-row">
+              <div class="cmd-name">
+                <code>.roledelete &lt;role&gt;</code>
+              </div>
+              <div class="cmd-desc">
+                Deletes the specified role (be careful!).
+              </div>
+            </div>
+
+            <!-- NUKE -->
+            <div class="command-subheading">Nuke</div>
+            <div class="command-row">
+              <div class="cmd-name">
+                <code>.nuke [channel]</code>
+              </div>
+              <div class="cmd-desc">
+                Clones and resets a channel, wiping all messages.  
+                If no channel is given, nukes the current channel.
+              </div>
+            </div>
+
+            <!-- LOCK -->
+            <div class="command-subheading">Lockdown</div>
+            <div class="command-row">
+              <div class="cmd-name">
+                <code>.lock</code> / <code>.unlock</code>
+              </div>
+              <div class="cmd-desc">
+                Locks or unlocks the current channel for regular members.
+              </div>
+            </div>
+
+            <div class="command-row">
+              <div class="cmd-name">
+                <code>.lockall</code> / <code>.unlockall</code>
+              </div>
+              <div class="cmd-desc">
+                Quickly locks or unlocks all main channels during raids.
+              </div>
+            </div>
+
+            <!-- BAN TOOLS -->
+            <div class="command-subheading">Ban tools</div>
+            <div class="command-row">
+              <div class="cmd-name">
+                <code>.ban @user [reason]</code>
+              </div>
+              <div class="cmd-desc">
+                Bans the mentioned user from the server, optionally with a reason.
+              </div>
+            </div>
+
+            <div class="command-row">
+              <div class="cmd-name">
+                <code>.unban @user</code>
+              </div>
+              <div class="cmd-desc">
+                Unbans the user (works with username+discriminator or ID, depending on setup).
+              </div>
+            </div>
+
+            <div class="command-row">
+              <div class="cmd-name">
+                <code>.forceban @user [reason]</code> / <code>.hackban @user [reason]</code>
+              </div>
+              <div class="cmd-desc">
+                Bans a user by ID even if they are not in the server yet.
+              </div>
+            </div>
+          </div>
+
+          <p class="command-note">
+            All moderation commands should be used by trusted staff only.
+            Make sure roles and permissions are configured correctly.
+          </p>
+        </div>
+      </section>
+
+      <section id="fun-commands" class="command-section">
+        <div class="command-header">
+          <h3>Fun commands</h3>
+          <p>Keep things light and comfy.</p>
+        </div>
+        <div class="command-body">
+          <p class="command-intro">
+            Fun / roast / chaos commands for Lumi:
+          </p>
+
+          <div class="command-table">
+            <div class="command-row">
+              <div class="cmd-name"><code>.predict @user</code></div>
+              <div class="cmd-desc">Gives a random prediction about the tagged user.</div>
+            </div>
+
+            <div class="command-row">
+              <div class="cmd-name"><code>.insult @user</code></div>
+              <div class="cmd-desc">Light roast for the user (fun, not serious).</div>
+            </div>
+
+            <div class="command-row">
+              <div class="cmd-name"><code>.match @u1 @u2</code></div>
+              <div class="cmd-desc">Checks how well two users match with each other.</div>
+            </div>
+
+            <div class="command-row">
+              <div class="cmd-name"><code>.pastlife @user</code></div>
+              <div class="cmd-desc">Tells what the tagged user was in a “past life”.</div>
+            </div>
+
+            <div class="command-row">
+              <div class="cmd-name"><code>.truth @user</code></div>
+              <div class="cmd-desc">Drops a random truth about the user.</div>
+            </div>
+
+            <div class="command-row">
+              <div class="cmd-name"><code>.ship @u1 @u2</code></div>
+              <div class="cmd-desc">Creates a ship name + compatibility for the two users.</div>
+            </div>
+
+            <div class="command-row">
+              <div class="cmd-name"><code>.ship random</code></div>
+              <div class="cmd-desc">Ships two random members from the server.</div>
+            </div>
+
+            <div class="command-row">
+              <div class="cmd-name"><code>.fakeping</code></div>
+              <div class="cmd-desc">Sends a fake “ping/typing” style message for jokes.</div>
+            </div>
+
+            <div class="command-row">
+              <div class="cmd-name"><code>.vibe</code></div>
+              <div class="cmd-desc">Rates the current chat / user vibe.</div>
+            </div>
+
+            <div class="command-row">
+              <div class="cmd-name"><code>.couple @u1 @u2</code></div>
+              <div class="cmd-desc">Rates how good these two would be as a couple.</div>
+            </div>
+
+            <div class="command-row">
+              <div class="cmd-name"><code>.petname @user</code></div>
+              <div class="cmd-desc">Gives a cute or funny pet-name to the user.</div>
+            </div>
+
+            <div class="command-row">
+              <div class="cmd-name"><code>.robo @user</code></div>
+              <div class="cmd-desc">Describes the tagged user as a robot / AI version.</div>
+            </div>
+
+            <div class="command-row">
+              <div class="cmd-name"><code>.luck</code></div>
+              <div class="cmd-desc">Checks today’s luck level for the caller.</div>
+            </div>
+
+            <div class="command-row">
+              <div class="cmd-name"><code>.simpscan @user</code></div>
+              <div class="cmd-desc">Scans how much of a simp the user is (percentage).</div>
+            </div>
+
+            <div class="command-row">
+              <div class="cmd-name"><code>.school @user</code></div>
+              <div class="cmd-desc">Says what type of student they would be in school.</div>
+            </div>
+
+            <div class="command-row">
+              <div class="cmd-name"><code>.fakeban @user [reason]</code></div>
+              <div class="cmd-desc">Sends a fake ban message with an optional reason.</div>
+            </div>
+
+            <div class="command-row">
+              <div class="cmd-name"><code>.anger @user</code></div>
+              <div class="cmd-desc">Rates how angry or dangerous the user is right now.</div>
+            </div>
+
+            <div class="command-row">
+              <div class="cmd-name"><code>.howsmart @user</code></div>
+              <div class="cmd-desc">Gives a fake IQ / smartness rating.</div>
+            </div>
+
+            <div class="command-row">
+              <div class="cmd-name"><code>.lie &lt;text&gt;</code></div>
+              <div class="cmd-desc">Checks your sentence and says if it’s a lie or not.</div>
+            </div>
+
+            <div class="command-row">
+              <div class="cmd-name"><code>.caught @user</code></div>
+              <div class="cmd-desc">Calls out the user as “caught in 4K”.</div>
+            </div>
+
+            <div class="command-row">
+              <div class="cmd-name"><code>.sarcasm &lt;text&gt;</code></div>
+              <div class="cmd-desc">Turns your text into a sarcastic reply.</div>
+            </div>
+
+            <div class="command-row">
+              <div class="cmd-name"><code>.choose opt1 | opt2 | opt3</code></div>
+              <div class="cmd-desc">Picks one option from the list you give.</div>
+            </div>
+
+            <div class="command-row">
+              <div class="cmd-name"><code>.8ball &lt;question&gt;</code></div>
+              <div class="cmd-desc">Magic 8-ball style yes/no answer.</div>
+            </div>
+
+            <div class="command-row">
+              <div class="cmd-name"><code>.quote &lt;text&gt;</code></div>
+              <div class="cmd-desc">Turns your message into a stylised quote.</div>
+            </div>
+
+            <div class="command-row">
+              <div class="cmd-name"><code>.battle @u1 @u2</code></div>
+              <div class="cmd-desc">Simulates a battle between two users and shows who wins.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="command-footer">
+          More fun commands coming soon...
+        </div>
+      </section>
+
+     <section id="util-commands" class="command-section">
+  <div class="command-header">
+    <h3>Utility commands</h3>
+    <p>Useful tools, info and shortcuts.</p>
+  </div>
+
+  <div class="command-body">
+    <p class="command-intro">
+      Handy tools for help, pings, giveaways, info and auto systems:
+    </p>
+
+    <div class="command-table">
+      <!-- BASIC -->
+      <div class="command-subheading">Basic</div>
+
+      <div class="command-row">
+        <div class="cmd-name">
+          <code>.help</code>
+        </div>
+        <div class="cmd-desc">
+          Shows Lumi’s help &amp; links embed inside Discord.
+        </div>
+      </div>
+
+      <div class="command-row">
+        <div class="cmd-name">
+          <code>.ping</code>
+        </div>
+        <div class="cmd-desc">
+          Shows bot latency / ping to Discord.
+        </div>
+      </div>
+      
+            <!-- BIRTHDAY -->
+      <div class="command-subheading">Birthday reminders</div>
+
+      <div class="command-row">
+        <div class="cmd-name"><code>.bday help</code></div>
+        <div class="cmd-desc">Shows all birthday commands and formats.</div>
+      </div>
+
+      <div class="command-row">
+        <div class="cmd-name"><code>.bday</code></div>
+        <div class="cmd-desc">
+          Shows your saved birthday. Use <code>.bday @user</code> to view someone else’s.
+        </div>
+      </div>
+
+      <div class="command-row">
+        <div class="cmd-name"><code>.bday set &lt;date&gt;</code></div>
+        <div class="cmd-desc">
+          Saves your birthday. Supports formats like
+          <code>23/11</code>, <code>23-11</code>, <code>23 Nov</code>, <code>Nov 23</code>.
+        </div>
+      </div>
+
+      <div class="command-row">
+        <div class="cmd-name"><code>.bday remove</code></div>
+        <div class="cmd-desc">Removes your saved birthday from this server.</div>
+      </div>
+
+      <div class="command-row">
+        <div class="cmd-name"><code>.bday list</code></div>
+        <div class="cmd-desc">
+          Lists all saved birthdays in the server (day + month, no years).
+        </div>
+      </div>
+
+      <div class="command-row">
+        <div class="cmd-name"><code>.bday setchannel &lt;#channel&gt;</code></div>
+        <div class="cmd-desc">
+          Sets which channel Lumi will use to send daily birthday reminders,
+          pinging the user whose birthday it is.
+        </div>
+      </div>
+
+      <div class="command-row">
+        <div class="cmd-name"><code>.bday channelremove</code></div>
+        <div class="cmd-desc">
+          Clears the birthday reminder channel and stops automatic birthday pings.
+        </div>
+      </div>
+
+
+      <!-- REACT / MESSAGE / DM -->
+      <div class="command-subheading">Messaging helpers</div>
+
+      <div class="command-row">
+        <div class="cmd-name">
+          <code>.react &lt;emote&gt;</code>
+        </div>
+        <div class="cmd-desc">
+          Reacts to the last message with the given emote (normal or custom).
+        </div>
+      </div>
+
+      <div class="command-row">
+        <div class="cmd-name">
+          <code>.message &lt;text&gt; [channel]</code>
+        </div>
+        <div class="cmd-desc">
+          Sends a normal message as Lumi.  
+          If no channel is mentioned it sends in the current channel.
+        </div>
+      </div>
+
+      <div class="command-row">
+        <div class="cmd-name">
+          <code>.dm @user &lt;text&gt;</code>
+        </div>
+        <div class="cmd-desc">
+          Sends a DM to the mentioned user with the text you provide.
+        </div>
+      </div>
+
+      <!-- GIVEAWAYS -->
+      <div class="command-subheading">Giveaways</div>
+
+      <div class="command-row">
+        <div class="cmd-name">
+          <code>.gstart &lt;duration&gt; &lt;winners&gt; &lt;prize...&gt; [#channel]</code>
+        </div>
+        <div class="cmd-desc">
+          Starts a giveaway. Example:  
+          <code>.gstart 1h 1 Nitro Classic</code> or mention a channel to host it there.
+        </div>
+      </div>
+
+      <div class="command-row">
+        <div class="cmd-name">
+          <code>.gend &lt;messageID&gt;</code>
+        </div>
+        <div class="cmd-desc">
+          Ends a running giveaway early using the giveaway message ID.
+        </div>
+      </div>
+
+      <div class="command-row">
+        <div class="cmd-name">
+          <code>.greroll &lt;messageID&gt;</code>
+        </div>
+        <div class="cmd-desc">
+          Rerolls winners for a finished giveaway.
+        </div>
+      </div>
+
+      <!-- AUTOREPLY -->
+      <div class="command-subheading">Auto reply</div>
+
+      <div class="command-row">
+        <div class="cmd-name">
+          <code>.ar add &lt;trigger&gt; &lt;response&gt;</code>
+        </div>
+        <div class="cmd-desc">
+          Adds a custom auto–reply. When someone types the trigger, Lumi sends the response.
+        </div>
+      </div>
+
+      <div class="command-row">
+        <div class="cmd-name">
+          <code>.ar list</code>
+        </div>
+        <div class="cmd-desc">
+          Shows all active auto–replies for this server.
+        </div>
+      </div>
+
+      <div class="command-row">
+        <div class="cmd-name">
+          <code>.ar clear &lt;trigger&gt;</code>
+        </div>
+        <div class="cmd-desc">
+          Removes one auto–reply by its trigger word.
+        </div>
+      </div>
+
+      <div class="command-row">
+        <div class="cmd-name">
+          <code>.ar clearall</code>
+        </div>
+        <div class="cmd-desc">
+          Deletes every auto–reply in the server. Use carefully.
+        </div>
+      </div>
+
+      <!-- AUTOREACT -->
+      <div class="command-subheading">Auto react</div>
+
+      <div class="command-row">
+        <div class="cmd-name">
+          <code>.arc add &lt;trigger&gt; &lt;emoji1&gt; [emoji2] [emoji3]</code>
+        </div>
+        <div class="cmd-desc">
+          Adds auto–reactions when a message contains the trigger text.
+        </div>
+      </div>
+
+      <div class="command-row">
+        <div class="cmd-name">
+          <code>.arc list</code>
+        </div>
+        <div class="cmd-desc">
+          Shows all active auto–react rules.
+        </div>
+      </div>
+
+      <div class="command-row">
+        <div class="cmd-name">
+          <code>.arc clear &lt;trigger&gt;</code>
+        </div>
+        <div class="cmd-desc">
+          Removes one auto–react rule by its trigger.
+        </div>
+      </div>
+
+      <div class="command-row">
+        <div class="cmd-name">
+          <code>.arc clearall</code>
+        </div>
+        <div class="cmd-desc">
+          Deletes all auto–react rules in the server.
+        </div>
+      </div>
+
+      <!-- INFO COMMANDS -->
+      <div class="command-subheading">Info commands</div>
+
+      <div class="command-row">
+        <div class="cmd-name">
+          <code>.si</code> / <code>.serverinfo</code>
+        </div>
+        <div class="cmd-desc">
+          Shows detailed info about the current server.
+        </div>
+      </div>
+
+      <div class="command-row">
+        <div class="cmd-name">
+          <code>.ui</code> / <code>.userinfo @user</code>
+        </div>
+        <div class="cmd-desc">
+          Shows information about a user (join date, roles, etc).
+        </div>
+      </div>
+
+      <div class="command-row">
+        <div class="cmd-name">
+          <code>.ri</code> / <code>.roleinfo @role</code>
+        </div>
+        <div class="cmd-desc">
+          Shows information about a specific role.
+        </div>
+      </div>
+
+      <!-- PFP + BANNER -->
+      <div class="command-subheading">Avatar &amp; banner</div>
+
+      <div class="command-row">
+        <div class="cmd-name">
+          <code>.av</code> / <code>.avatar @user</code>
+        </div>
+        <div class="cmd-desc">
+          Sends the user’s avatar (supports GIF / PNG / etc).
+        </div>
+      </div>
+
+      <div class="command-row">
+        <div class="cmd-name">
+          <code>.banner @user</code>
+        </div>
+        <div class="cmd-desc">
+          Shows the user’s profile banner if they have one.
+        </div>
+      </div>
+
+      <!-- AFK -->
+      <div class="command-subheading">AFK</div>
+
+      <div class="command-row">
+        <div class="cmd-name">
+          <code>.afk &lt;reason&gt;</code>
+        </div>
+        <div class="cmd-desc">
+          Marks you as AFK with a reason. Lumi will reply when someone mentions you.
+        </div>
+      </div>
+
+      <!-- SNIPE -->
+      <div class="command-subheading">Snipe tools</div>
+
+      <div class="command-row">
+        <div class="cmd-name">
+          <code>.snipe</code>
+        </div>
+        <div class="cmd-desc">
+          Shows the last deleted message in the channel.
+        </div>
+      </div>
+
+      <div class="command-row">
+        <div class="cmd-name">
+          <code>.snipeall</code>
+        </div>
+        <div class="cmd-desc">
+          Shows a list of recently deleted messages (where supported).
+        </div>
+      </div>
+
+      <div class="command-row">
+        <div class="cmd-name">
+          <code>.editsnipe</code>
+        </div>
+        <div class="cmd-desc">
+          Shows the last edited message and what changed.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="command-footer">
+    Utility tools are safe for most members, but some (giveaways / auto–systems)
+    are better kept for staff.
+  </div>
+</section>
+
+
+      <section id="log-commands" class="command-section">
+        <div class="command-header">
+          <h3>Logging & events</h3>
+          <p>Everything related to logs and audit-style features.</p>
+        </div>
+        <div class="command-body">
+          <p class="placeholder">
+            Coming soon...
+          </p>
+          <ul>
+            <!-- yaha logging commands daalna -->
+          </ul>
+        </div>
+        <div class="command-footer">
+          working on it...
+        </div>
+      </section>
+
+      <footer class="page-footer">
+        © 2025 Lumi · Command reference for your cozy servers.
+      </footer>
+    </section>
+  </div>
+
+  <script>
+    // "Start with Lumi" → scroll to command area
+    const startBtn = document.getElementById("start-btn");
+    if (startBtn) {
+      startBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+        const target = document.getElementById("commands-area");
+        if (target) target.scrollIntoView({ behavior: "smooth" });
+      });
+    }
+
+    // tabs logic for command categories
+    const catButtons = document.querySelectorAll(".category-btn");
+    const sections = document.querySelectorAll(".command-section");
+    const commandsWrapper = document.getElementById("commands-area");
+
+    function activateCategory(id) {
+      catButtons.forEach((btn) => {
+        btn.classList.toggle("active", btn.dataset.target === id);
+      });
+      sections.forEach((sec) => {
+        sec.classList.toggle("active", sec.id === id);
+      });
+
+      if (commandsWrapper) {
+        commandsWrapper.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+
+    catButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const id = btn.getAttribute("data-target");
+        if (!id) return;
+        activateCategory(id);
+      });
+    });
+
+    // default tab: AI system
+    activateCategory("ai-commands");
+  </script>
+</body>
+</html>

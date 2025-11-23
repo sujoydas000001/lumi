@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Lumi — Terms of Service</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Terms of Service for the Lumi Discord bot." />
+
+  <style>
+    :root {
+      --bg: #020617;
+      --bg-card: #020617;
+      --accent: #ec4899;
+      --accent-soft: rgba(236, 72, 153, 0.2);
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --border: #1f2937;
+      --font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: var(--font);
+      background: radial-gradient(circle at top, #1f2937 0, #020617 55%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 24px 12px;
+    }
+
+    .shell {
+      width: 100%;
+      max-width: 880px;
+    }
+
+    .card {
+      background: rgba(15, 23, 42, 0.97);
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+      overflow: hidden;
+      backdrop-filter: blur(14px);
+    }
+
+    .card-header {
+      padding: 20px 24px 16px;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.35);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: radial-gradient(circle at left, var(--accent-soft), transparent 60%);
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(236, 72, 153, 0.55);
+      color: var(--muted);
+    }
+    .pill-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.25);
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      margin: 4px 0 2px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .logo-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #f97316, #ec4899, #6366f1);
+      box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.3);
+    }
+
+    .subtitle {
+      margin: 0;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    .card-body {
+      padding: 20px 24px 24px;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .meta {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    h2 {
+      font-size: 1.15rem;
+      margin-top: 1.6em;
+      margin-bottom: 0.6em;
+      color: #f9fafb;
+    }
+
+    p { margin: 0.35em 0; }
+
+    ul {
+      padding-left: 1.2rem;
+      margin: 0.35em 0;
+    }
+    li { margin: 0.2em 0; }
+
+    a {
+      color: #60a5fa;
+      text-decoration: none;
+    }
+    a:hover { text-decoration: underline; }
+
+    hr {
+      border: none;
+      border-top: 1px solid rgba(148, 163, 184, 0.4);
+      margin: 1.4em 0;
+    }
+
+    blockquote {
+      margin: 0.6em 0;
+      padding-left: 12px;
+      border-left: 3px solid rgba(148, 163, 184, 0.7);
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .footer {
+      margin-top: 18px;
+      font-size: 0.78rem;
+      color: var(--muted);
+      border-top: 1px solid rgba(148, 163, 184, 0.35);
+      padding-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .footer a {
+      color: #9ca3af;
+      text-decoration: none;
+    }
+    .footer a:hover { color: #e5e7eb; }
+
+    @media (max-width: 640px) {
+      body { padding: 16px 10px; }
+      .card-header { padding: 16px; }
+      .card-body { padding: 16px; }
+      h1 { font-size: 1.25rem; flex-wrap: wrap; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="card">
+      <header class="card-header">
+        <div class="logo-dot"></div>
+        <div>
+          <div class="pill">
+            <span class="pill-dot"></span>
+            <span>Lumi · Legal</span>
+          </div>
+          <h1>Lumi — Terms of Service</h1>
+          <p class="subtitle">
+            Official Terms of Service for the Lumi Discord bot.
+          </p>
+        </div>
+      </header>
+
+      <div class="card-body">
+        <p class="meta"><strong>Last updated:</strong> 21 November 2025</p>
+
+        <p>
+          By using
+          <strong>
+            <a href="https://discord.com/oauth2/authorize?client_id=1440201607932543068" target="_blank" rel="noopener">
+              Lumi
+            </a>
+          </strong>
+          (the “Bot”) in your Discord server or account, you agree to these Terms of Service.
+          If you do not agree, you may remove the Bot from your servers and stop using it.
+        </p>
+
+        <hr />
+
+        <h2>1. Requirements &amp; Eligibility</h2>
+        <ul>
+          <li>
+            You must follow the
+            <strong>
+              <a href="https://discord.com/terms" target="_blank" rel="noopener">
+                Discord Terms of Service
+              </a>
+            </strong>
+            and
+            <strong>
+              <a href="https://discord.com/guidelines" target="_blank" rel="noopener">
+                Community Guidelines
+              </a>
+            </strong>.
+          </li>
+          <li>You must have permission to invite and manage bots in any server where you use Lumi.</li>
+          <li>If your local laws impose age restrictions for online services, you must comply with them.</li>
+        </ul>
+
+        <hr />
+
+        <h2>2. Using Lumi</h2>
+        <ul>
+          <li>Lumi is provided “as is”, without any guarantee of uptime, performance, or feature availability.</li>
+          <li>Features may change, break, or be removed at any time without prior notice.</li>
+          <li>We reserve the right to:
+            <ul>
+              <li>Restrict or block Lumi from specific users or servers.</li>
+              <li>Disable certain commands or features if they are abused or cause issues.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <hr />
+
+        <h2>3. Prohibited Use</h2>
+        <p>You agree <strong>not</strong> to use Lumi for:</p>
+        <ul>
+          <li>Violating Discord’s Terms of Service or Community Guidelines.</li>
+          <li>Harassment, hate speech, illegal activities, or other abusive behavior.</li>
+          <li>Spamming, mass DMing, or automated advertising.</li>
+          <li>Any activity that could harm Lumi, its infrastructure, or other users.</li>
+        </ul>
+        <p>We may blacklist / ban users or servers that violate these rules.</p>
+
+        <hr />
+
+        <h2>4. Data &amp; Privacy</h2>
+        <p>Lumi may store limited data to provide its features, such as:</p>
+        <ul>
+          <li>Discord user IDs, usernames, and server IDs.</li>
+          <li>Message content or snippets used for logs, warnings, auto-replies, birthdays, and similar features.</li>
+          <li>Settings and configuration for each server (prefix, channels, roles, etc).</li>
+        </ul>
+        <p>
+          More details are explained in the
+          <strong>
+            <!-- TODO: change this URL when you have the privacy page -->
+            <a href="https://lumibot.netlify.app/privacy_policy" target="_blank" rel="noopener">
+              Privacy Policy
+            </a>
+          </strong>.
+        </p>
+        <p>
+          By using Lumi, you agree that this data may be stored and processed for the purpose of running the Bot.
+        </p>
+
+        <hr />
+
+        <h2>5. Availability &amp; Support</h2>
+        <ul>
+          <li>Lumi runs on third-party hosting and may go offline unexpectedly.</li>
+          <li>We do not guarantee 24/7 availability.</li>
+          <li>
+            Support is offered <strong>on a best-effort basis</strong> via our support server:
+            <blockquote>
+              Support Server:
+              <a href="https://discord.gg/pvztFtaDMP" target="_blank" rel="noopener">
+                Lumi Support
+              </a>
+            </blockquote>
+          </li>
+        </ul>
+
+        <hr />
+
+        <h2>6. Liability</h2>
+        <ul>
+          <li>
+            To the maximum extent allowed by law, Lumi and its developers are
+            <strong>not liable</strong>
+            for any loss, damage, or harm caused by using or being unable to use the Bot.
+          </li>
+          <li>You are responsible for how Lumi is used in your server.</li>
+        </ul>
+        <p>
+          If you are server staff, you are responsible for communicating your own server rules to your members.
+        </p>
+
+        <hr />
+
+        <h2>7. Termination</h2>
+        <p>
+          We may suspend or terminate Lumi’s service for any user or server at any time, without prior notice,
+          particularly in cases of abuse or ToS violations.
+        </p>
+        <p>
+          You may stop using Lumi at any time by removing the Bot from your servers.
+        </p>
+
+        <hr />
+
+        <h2>8. Changes to These Terms</h2>
+        <p>We may update these Terms from time to time.</p>
+        <ul>
+          <li>Significant changes may be announced in the support server or via a status message.</li>
+          <li>Continued use of Lumi after changes take effect means you accept the new Terms.</li>
+        </ul>
+
+        <hr />
+
+        <h2>9. Contact</h2>
+        <p>For questions or concerns about these Terms, you can contact:</p>
+        <ul>
+          <li>Email: <a href="mailto:discordia4455@gmail.com">discordia4455@gmail.com</a></li>
+          <li>
+            Support Server:
+            <a href="https://discord.gg/pvztFtaDMP" target="_blank" rel="noopener">
+              Lumi
+            </a>
+          </li>
+        </ul>
+
+        <div class="footer">
+          <span>© <span id="year"></span> Lumi · All rights reserved.</span>
+          <span>
+            Invite the bot:
+            <a href="https://discord.com/oauth2/authorize?client_id=1440201607932543068" target="_blank" rel="noopener">
+              Lumi Invite
+            </a>
+          </span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
