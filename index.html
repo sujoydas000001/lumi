@@ -1725,62 +1725,85 @@
 </section>
 
 
-      <section id="log-commands" class="command-section">
-  <div class="command-header">
-    <h3>Logging & Events</h3>
-    <p>Configure Lumi’s logging system, track moderation actions, and monitor server activity.</p>
-  </div>
+     <section id="log-commands" class="command-section log-card">
+  <div class="log-card-inner">
+    <header class="log-card-header">
+      <div class="log-title">
+        <h3>Logging &amp; Events</h3>
+        <p>Track joins, deletes, edits and moderation actions in dedicated channels.</p>
+      </div>
+      <div class="log-meta">
+        <span class="badge">Configurable</span>
+        <span class="badge">Embeds</span>
+      </div>
+    </header>
 
-  <div class="command-body">
-    <ul class="command-list">
-      
-      <li class="command-item">
-        <strong>.log</strong>
-        <p>Shows the full logging help menu.</p>
-      </li>
+    <div class="log-card-body">
+      <div class="log-columns">
+        <div class="log-col commands">
+          <h4>Main Commands</h4>
 
-      <li class="command-item">
-        <strong>.log status</strong>
-        <p>Displays which log types are enabled and what channels they use.</p>
-      </li>
+          <div class="cmd">
+            <code class="cmd-name">.log</code>
+            <div class="cmd-desc">Show logging help and usage (this menu).</div>
+          </div>
 
-      <li class="command-item">
-        <strong>.log on &lt;type&gt;</strong>
-        <p>Enable a log type. If no type is provided, all logs are enabled.</p>
-      </li>
+          <div class="cmd">
+            <code class="cmd-name">.log status</code>
+            <div class="cmd-desc">Show which log types are ON/OFF and assigned channels.</div>
+          </div>
 
-      <li class="command-item">
-        <strong>.log off &lt;type&gt;</strong>
-        <p>Disable a log type. If no type is provided, all logs are disabled.</p>
-      </li>
+          <div class="cmd">
+            <code class="cmd-name">.log on &lt;type&gt;</code>
+            <div class="cmd-desc">Enable a log type (omit &lt;type&gt; to enable all).</div>
+          </div>
 
-      <li class="command-item">
-        <strong>.log setchannel &lt;#channel / id&gt; &lt;type?&gt;</strong>
-        <p>Assign a logging output channel. If type is omitted, it becomes the global log channel.</p>
-      </li>
+          <div class="cmd">
+            <code class="cmd-name">.log off &lt;type&gt;</code>
+            <div class="cmd-desc">Disable a log type (omit &lt;type&gt; to disable all).</div>
+          </div>
 
-      <li class="command-item">
-        <strong>.log channel remove &lt;type / all&gt;</strong>
-        <p>Removes log channels for a specific type or wipes all assigned channels.</p>
-      </li>
+          <div class="cmd">
+            <code class="cmd-name">.log setchannel &lt;#channel|id&gt; &lt;type?&gt;</code>
+            <div class="cmd-desc">Assign a channel for a type; omit type to set global channel.</div>
+          </div>
 
-      <li class="command-item">
-        <strong>Available Types</strong>
-        <p><code>lumi</code>, <code>member</code>, <code>server</code>, <code>channel</code>, <code>join</code>, <code>leave</code>, <code>emoji</code>, <code>role</code>, <code>message</code>, <code>voice</code></p>
-      </li>
+          <div class="cmd">
+            <code class="cmd-name">.log channel remove &lt;type|all&gt;</code>
+            <div class="cmd-desc">Remove channel mapping for a type, or wipe all mappings.</div>
+          </div>
+        </div>
 
-      <li class="command-item">
-        <strong>Auto-Logged Events</strong>
-        <p>Member join/leave, bans, unbans, role updates, emoji updates, channel updates, server updates, voice state changes, message edits/deletes, bulk deletes, invite logs & moderation logs.</p>
-      </li>
+        <div class="log-col types">
+          <h4>Types & Auto-logs</h4>
 
-    </ul>
-  </div>
+          <p class="types-list"><code>lumi</code>, <code>member</code>, <code>server</code>, <code>channel</code>, <code>join</code>, <code>leave</code>, <code>emoji</code>, <code>role</code>, <code>message</code>, <code>voice</code></p>
 
-  <div class="command-footer">
-    Fully functional & customizable ✨
+          <h5>Auto-Logged Events</h5>
+          <ul class="auto-logs">
+            <li>Member join / leave / ban / unban / timeout</li>
+            <li>Role create / delete / update</li>
+            <li>Channel create / delete / update</li>
+            <li>Emoji add / remove / rename</li>
+            <li>Message edit / delete / bulk delete (JSON dump)</li>
+            <li>Invite create / delete / uses</li>
+            <li>Voice state changes (join / leave / move)</li>
+            <li>Moderator commands (warn, kick, ban, mute) — logged with executor</li>
+          </ul>
+
+          <div class="note">
+            <strong>Note:</strong> All logs are delivered as embeds. Use <code>.log setchannel</code> to point logs to the correct channel.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="log-card-footer">
+      <small>Fully configurable • Embeds for readability • Use server admin or bot-manager permissions.</small>
+    </footer>
   </div>
 </section>
+
 
 
       <footer class="page-footer">
@@ -1831,6 +1854,7 @@
   </script>
 </body>
 </html>
+
 
 
 
