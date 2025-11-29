@@ -1726,22 +1726,62 @@
 
 
       <section id="log-commands" class="command-section">
-        <div class="command-header">
-          <h3>Logging & events</h3>
-          <p>Everything related to logs and audit-style features.</p>
-        </div>
-        <div class="command-body">
-          <p class="placeholder">
-            Coming soon...
-          </p>
-          <ul>
-            <!-- yaha logging commands daalna -->
-          </ul>
-        </div>
-        <div class="command-footer">
-          working on it...
-        </div>
-      </section>
+  <div class="command-header">
+    <h3>Logging & Events</h3>
+    <p>Configure Lumi’s logging system, track moderation actions, and monitor server activity.</p>
+  </div>
+
+  <div class="command-body">
+    <ul class="command-list">
+      
+      <li class="command-item">
+        <strong>.log</strong>
+        <p>Shows the full logging help menu.</p>
+      </li>
+
+      <li class="command-item">
+        <strong>.log status</strong>
+        <p>Displays which log types are enabled and what channels they use.</p>
+      </li>
+
+      <li class="command-item">
+        <strong>.log on &lt;type&gt;</strong>
+        <p>Enable a log type. If no type is provided, all logs are enabled.</p>
+      </li>
+
+      <li class="command-item">
+        <strong>.log off &lt;type&gt;</strong>
+        <p>Disable a log type. If no type is provided, all logs are disabled.</p>
+      </li>
+
+      <li class="command-item">
+        <strong>.log setchannel &lt;#channel / id&gt; &lt;type?&gt;</strong>
+        <p>Assign a logging output channel. If type is omitted, it becomes the global log channel.</p>
+      </li>
+
+      <li class="command-item">
+        <strong>.log channel remove &lt;type / all&gt;</strong>
+        <p>Removes log channels for a specific type or wipes all assigned channels.</p>
+      </li>
+
+      <li class="command-item">
+        <strong>Available Types</strong>
+        <p><code>lumi</code>, <code>member</code>, <code>server</code>, <code>channel</code>, <code>join</code>, <code>leave</code>, <code>emoji</code>, <code>role</code>, <code>message</code>, <code>voice</code></p>
+      </li>
+
+      <li class="command-item">
+        <strong>Auto-Logged Events</strong>
+        <p>Member join/leave, bans, unbans, role updates, emoji updates, channel updates, server updates, voice state changes, message edits/deletes, bulk deletes, invite logs & moderation logs.</p>
+      </li>
+
+    </ul>
+  </div>
+
+  <div class="command-footer">
+    Fully functional & customizable ✨
+  </div>
+</section>
+
 
       <footer class="page-footer">
         © 2025 Lumi · Command reference for your cozy servers.
@@ -1791,6 +1831,7 @@
   </script>
 </body>
 </html>
+
 
 
 
